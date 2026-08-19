@@ -1,109 +1,157 @@
 import type { IconName } from '@/lib/icons'
+import type { IllustrationName } from '@/components/hero/CardIllustration'
 
 /** Conjunto fechado de cores de acento — usado em cards, categorias e badges. */
 export type AccentColor = 'roxo' | 'verde' | 'amarelo' | 'coral'
 
+export interface HeroCardBlock {
+  icone: IconName
+  rotulo: string
+  texto: string
+}
+
 export interface HeroCard {
   id: string
+  /** Número de catálogo (produto real tem +300 cards) — só exibição, não é posição no deck. */
+  numero: number
   categoria: string
   cor: AccentColor
   titulo: string
-  texto: string
-  /** Nome do ícone (lib/icons.ts) — não a referência do componente, que não
-   *  cruza a fronteira Server → Client Component como prop (RSC). */
-  icone: IconName
+  ilustracao: IllustrationName
+  /** Sempre 3 — cada card explica em 3 ângulos curtos em vez de um parágrafo único. */
+  blocos: readonly [HeroCardBlock, HeroCardBlock, HeroCardBlock]
 }
 
 export const HERO_CARDS: HeroCard[] = [
   {
     id: 'emocoes',
+    numero: 46,
     categoria: 'Emoções',
     cor: 'roxo',
     titulo: 'Nomear diminui a intensidade',
-    texto:
-      'Quando a criança encontra a palavra para o que sente, a emoção deixa de ser uma onda difusa e vira algo que ela consegue observar.',
-    icone: 'Heart',
+    ilustracao: 'conversa',
+    blocos: [
+      { icone: 'Waves', rotulo: 'O que acontece:', texto: 'A emoção chega como uma onda difusa, sem contorno.' },
+      { icone: 'MessageCircle', rotulo: 'O que ajuda:', texto: 'Encontrar a palavra certa pro que está sentindo.' },
+      { icone: 'Eye', rotulo: 'Por quê:', texto: 'Nomear transforma a onda em algo que dá pra observar.' },
+    ],
   },
   {
     id: 'comportamento',
+    numero: 112,
     categoria: 'Comportamento',
     cor: 'amarelo',
     titulo: 'Birra raramente é manipulação',
-    texto:
-      'Na maior parte das vezes é um sistema de regulação sobrecarregado. Antes de corrigir, é preciso ajudar o corpo a voltar ao normal.',
-    icone: 'Activity',
+    ilustracao: 'sozinho',
+    blocos: [
+      { icone: 'HelpCircle', rotulo: 'Parece:', texto: 'Uma tentativa de manipular ou testar limites.' },
+      { icone: 'Zap', rotulo: 'Geralmente é:', texto: 'Um sistema de regulação sobrecarregado.' },
+      { icone: 'RefreshCw', rotulo: 'Antes de corrigir:', texto: 'Ajudar o corpo a voltar ao normal primeiro.' },
+    ],
   },
   {
     id: 'ansiedade',
+    numero: 178,
     categoria: 'Ansiedade',
     cor: 'coral',
     titulo: 'A evitação alivia agora e ensina medo depois',
-    texto:
-      'Cada fuga confirma para a criança que aquilo era mesmo perigoso. O alívio imediato é o que mantém o ciclo funcionando.',
-    icone: 'Waves',
+    ilustracao: 'sozinho',
+    blocos: [
+      { icone: 'RefreshCw', rotulo: 'O ciclo:', texto: 'Fugir alivia na hora, então o cérebro repete a fuga.' },
+      { icone: 'AlertCircle', rotulo: 'O problema:', texto: 'Cada fuga confirma que aquilo era mesmo perigoso.' },
+      { icone: 'Waves', rotulo: 'O resultado:', texto: 'O alívio imediato é o que mantém o ciclo girando.' },
+    ],
   },
   {
     id: 'tdah',
+    numero: 203,
     categoria: 'TDAH',
     cor: 'verde',
     titulo: 'Não é falta de atenção',
-    texto:
-      'É dificuldade de decidir para onde a atenção vai e por quanto tempo fica. O hiperfoco é a outra face do mesmo funcionamento.',
-    icone: 'Focus',
+    ilustracao: 'sozinho',
+    blocos: [
+      { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Falta de atenção ou preguiça de prestar atenção.' },
+      { icone: 'Focus', rotulo: 'É:', texto: 'Dificuldade de decidir para onde a atenção vai.' },
+      { icone: 'Sparkles', rotulo: 'Outro lado:', texto: 'O hiperfoco é a mesma dificuldade, só que ao contrário.' },
+    ],
   },
   {
     id: 'autismo',
+    numero: 67,
     categoria: 'Autismo',
     cor: 'roxo',
     titulo: 'Previsibilidade é acessibilidade',
-    texto:
-      'Antecipar o que vai acontecer reduz a carga de processamento e libera recursos para o que realmente importa naquele momento.',
-    icone: 'Compass',
+    ilustracao: 'conversa',
+    blocos: [
+      { icone: 'Compass', rotulo: 'O que faz:', texto: 'Antecipar o que vai acontecer reduz a carga de processamento.' },
+      { icone: 'Zap', rotulo: 'O efeito:', texto: 'Libera recursos pro que realmente importa no momento.' },
+      { icone: 'CheckCircle2', rotulo: 'Por isso:', texto: 'Previsibilidade não é rigidez, é acessibilidade.' },
+    ],
   },
   {
     id: 'vinculo',
+    numero: 251,
     categoria: 'Vínculo',
     cor: 'amarelo',
     titulo: '"Não sei" costuma ser um pedido de tempo',
-    texto:
-      'Raramente é recusa. Às vezes a criança precisa de outra pergunta, de um desenho, ou só de mais alguns segundos de silêncio.',
-    icone: 'MessageCircle',
+    ilustracao: 'conversa',
+    blocos: [
+      { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Recusa em responder ou falta de vontade.' },
+      { icone: 'Clock', rotulo: 'Costuma ser:', texto: 'Um pedido de tempo, de outra pergunta ou de silêncio.' },
+      { icone: 'MessageCircle', rotulo: 'Na prática:', texto: 'Tente um desenho, outra pergunta, ou espere mais um pouco.' },
+    ],
   },
   {
     id: 'desenvolvimento',
+    numero: 15,
     categoria: 'Desenvolvimento',
     cor: 'verde',
     titulo: 'Antes dos 6 anos, o corpo fala primeiro',
-    texto:
-      'Dor de barriga antes da escola, dor de cabeça recorrente e sono agitado podem ser as primeiras palavras de uma ansiedade sem nome.',
-    icone: 'HeartPulse',
+    ilustracao: 'escola',
+    blocos: [
+      { icone: 'HeartPulse', rotulo: 'Sinais comuns:', texto: 'Dor de barriga antes da escola, dor de cabeça, sono agitado.' },
+      { icone: 'AlertCircle', rotulo: 'O que pode ser:', texto: 'As primeiras palavras de uma ansiedade sem nome ainda.' },
+      { icone: 'Sprout', rotulo: 'Por que importa:', texto: 'Antes dos 6 anos, o corpo fala primeiro que a boca.' },
+    ],
   },
   {
     id: 'familia',
+    numero: 289,
     categoria: 'Família',
     cor: 'roxo',
     titulo: 'Validar não é concordar',
-    texto:
-      'Reconhecer o que a criança sentiu não significa aprovar o que ela fez. São dois momentos diferentes da mesma conversa.',
-    icone: 'Users',
+    ilustracao: 'familia',
+    blocos: [
+      { icone: 'Heart', rotulo: 'Validar:', texto: 'Reconhecer o que a criança sentiu naquele momento.' },
+      { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Aprovar ou concordar com o que ela fez.' },
+      { icone: 'MessageCircle', rotulo: 'Na prática:', texto: 'São dois momentos diferentes da mesma conversa.' },
+    ],
   },
   {
     id: 'luto',
+    numero: 134,
     categoria: 'Luto',
     cor: 'coral',
     titulo: 'Crianças enlutam em ondas',
-    texto:
-      'Choram, brincam, perguntam de novo e voltam a brincar. Isso não é indiferença: é a forma infantil de suportar a dose.',
-    icone: 'CloudRain',
+    ilustracao: 'familia',
+    blocos: [
+      { icone: 'CloudRain', rotulo: 'Como aparece:', texto: 'Choram, voltam a brincar, perguntam de novo, brincam de novo.' },
+      { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Indiferença ou que a criança não entendeu a perda.' },
+      { icone: 'Waves', rotulo: 'É:', texto: 'A forma infantil de suportar a dose, em ondas.' },
+    ],
   },
   {
     id: 'escola',
+    numero: 96,
     categoria: 'Escola',
     cor: 'amarelo',
     titulo: 'Recusa escolar quase nunca é preguiça',
-    texto:
-      'É uma conta entre o que a criança teme e os recursos que ela sente ter. Mudar o resultado exige mexer nos dois lados.',
-    icone: 'School',
+    ilustracao: 'escola',
+    blocos: [
+      { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Preguiça ou falta de vontade de ir à escola.' },
+      { icone: 'Scale', rotulo: 'É:', texto: 'Uma conta entre o que ela teme e os recursos que sente ter.' },
+      { icone: 'RefreshCw', rotulo: 'Pra mudar:', texto: 'Precisa mexer nos dois lados da conta, não só um.' },
+    ],
   },
 ]
 

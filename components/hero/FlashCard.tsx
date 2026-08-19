@@ -4,10 +4,11 @@ import { useRef } from 'react'
 import type { KeyboardEvent, PointerEvent } from 'react'
 import { motion, useIsPresent, useMotionValue, useTransform, type PanInfo, type Variants } from 'motion/react'
 import { Badge } from '@/components/ui/Badge'
+import { CardIllustration } from './CardIllustration'
+import { cn } from '@/lib/cn'
 import { EASE, SPRING } from '@/lib/motion'
 import { ICONS } from '@/lib/icons'
 import type { HeroCard } from '@/content/hero-cards'
-import type { LucideIcon } from 'lucide-react'
 
 const SWIPE_DISTANCE = 90 // px
 const SWIPE_VELOCITY = 520 // px/s
@@ -96,7 +97,6 @@ export function FlashCard({
   const restState = rest(depth)
   // O card que está saindo fica acima de toda a pilha enquanto cai.
   const zIndex = isPresent ? restState.zIndex : 999
-  const Icon = ICONS[card.icone]
 
   function handlePointerDown(event: PointerEvent) {
     isDraggingRef.current = false
@@ -156,7 +156,7 @@ export function FlashCard({
         transition={reducedMotion ? { duration: 0.15 } : SPRING.deck}
         className="pointer-events-none"
       >
-        <CardFace card={card} Icon={Icon} />
+        <CardFace card={card} />
       </motion.div>
     )
   }
@@ -179,7 +179,7 @@ export function FlashCard({
         onKeyDown={handleKeyDown}
         className="cursor-pointer"
       >
-        <CardFace card={card} Icon={Icon} />
+        <CardFace card={card} />
       </motion.div>
     )
   }
@@ -215,21 +215,70 @@ export function FlashCard({
       // para um eixo único (o que quebraria dragConstraints/dragElastic em y).
       className="cursor-grab !touch-pan-y"
     >
-      <CardFace card={card} Icon={Icon} />
+      <CardFace card={card} />
     </motion.div>
   )
 }
 
-function CardFace({ card, Icon }: { card: HeroCard; Icon: LucideIcon }) {
+// Cabeçalho colorido por cor de acento — o "título colorido no topo" da referência,
+// dentro do vocabulário de cores já existente do projeto (nada de tom novo).
+const HEADER_BG: Record<HeroCard['cor'], string> = {
+  roxo: 'bg-roxo-500',
+  verde: 'bg-verde-500',
+  amarelo: 'bg-amarelo-400',
+  coral: 'bg-coral-400',
+}
+
+const HEADER_TEXT: Record<HeroCard['cor'], string> = {
+  roxo: 'text-white',
+  verde: 'text-tinta-900',
+  amarelo: 'text-tinta-900',
+  coral: 'text-tinta-900',
+}
+
+function CardFace({ card }: { card: HeroCard }) {
   return (
-    <div className="flex h-full w-full flex-col justify-between rounded-xl bg-white p-6 shadow-card">
-      <div className="flex items-center justify-between">
-        <Badge color={card.cor}>{card.categoria}</Badge>
-        <Icon aria-hidden="true" strokeWidth={2.25} className="h-6 w-6 text-tinta-400" />
+    <div className="flex h-full w-full flex-col overflow-hidden rounded-xl bg-white shadow-card">
+      <div className={cn('flex items-center justify-between px-4 py-2.5', HEADER_BG[card.cor], HEADER_TEXT[card.cor])}>
+        {/* Chip sempre branco sólido + texto escuro fixo — não herda a cor do
+            cabeçalho, senão em cabeçalho roxo (texto branco) ficaria quase
+            ilegível (texto branco sobre um branco/25 quase idêntico). */}
+        <span className="rounded-full bg-white px-2 py-0.5 text-xs font-bold text-tinta-900">
+          {String(card.numero).padStart(3, '0')}
+        </span>
+        <Badge color="roxo" className="bg-white/90 text-roxo-800">
+          {card.categoria}
+        </Badge>
       </div>
-      <div>
-        <p className="font-display text-h3 font-semibold text-tinta-900">{card.titulo}</p>
-        <p className="mt-3 max-w-[48ch] text-sm text-tinta-600">{card.texto}</p>
+
+      <p className="px-4 pt-2 font-display text-sm font-semibold leading-tight text-tinta-900 sm:text-base">
+        {card.titulo}
+      </p>
+
+      <div className="flex justify-center px-4 py-1">
+        <CardIllustration name={card.ilustracao} className="h-12 w-auto sm:h-14" />
+      </div>
+
+      <div className="flex flex-col gap-3 px-4 pb-3">
+        {card.blocos.map((bloco) => {
+          const BlockIcon = ICONS[bloco.icone]
+          return (
+            <div key={bloco.rotulo} className="flex items-start gap-2">
+              <span
+                className={cn(
+                  'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full',
+                  HEADER_BG[card.cor],
+                )}
+              >
+                <BlockIcon aria-hidden="true" strokeWidth={2.5} className={cn('h-3 w-3', HEADER_TEXT[card.cor])} />
+              </span>
+              <p className="text-xs leading-snug text-tinta-600 sm:text-sm">
+                <span className="font-semibold text-tinta-900">{bloco.rotulo} </span>
+                {bloco.texto}
+              </p>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

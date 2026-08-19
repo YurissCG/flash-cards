@@ -18,7 +18,7 @@ export const HERO_COPY = {
   headline:
     'Tenha na palma da mão os principais conteúdos da Psicologia Infantil em *+300 Cards Visuais* e transforme horas de pesquisa em consultas de poucos minutos.',
   subheadline:
-    'Uma biblioteca prática criada para estudantes e profissionais de Psicologia que querem consultar temas como desenvolvimento infantil, emoções, comportamento, ansiedade, TDAH, autismo, família e muito mais — de forma simples, visual e organizada.',
+    'Uma biblioteca prática criada para estudantes e profissionais de Psicologia que querem consultar temas como desenvolvimento infantil, emoções, comportamento, ansiedade, TDAH, autismo, família e muito mais, de forma simples, visual e organizada.',
   badge: '⚡ Acesso imediato · 7 dias de garantia',
   ctaLabel: 'QUERO ACESSAR OS +300 CARDS AGORA',
   microcopy: 'Acesso digital · Consulte pelo celular, tablet ou computador',

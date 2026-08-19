@@ -29,7 +29,7 @@ export const PRIVACY_POLICY_COPY = {
     {
       titulo: 'Compartilhamento com terceiros',
       paragrafos: [
-        'Compartilhamos dados apenas com os prestadores necessários para operar o serviço — processador de pagamento e ferramentas de analytics —, nunca para fins de venda a terceiros.',
+        'Compartilhamos dados apenas com os prestadores necessários para operar o serviço (processador de pagamento e ferramentas de analytics), nunca para fins de venda a terceiros.',
       ],
     },
     {
@@ -79,7 +79,7 @@ export const TERMS_OF_USE_COPY = {
 } as const
 
 export const OBRIGADO_COPY = {
-  titulo: 'Pedido confirmado — obrigado!',
+  titulo: 'Pedido confirmado, obrigado!',
   corpo: 'Você vai receber as instruções de acesso aos +300 Cards de Psicologia Infantil no e-mail usado na compra.',
   // TODO: substituir pela orientação real (prazo, onde checar spam, link de acesso direto se houver).
   aviso: 'Se não encontrar o e-mail em alguns minutos, confira a caixa de spam ou promoções antes de entrar em contato.',
