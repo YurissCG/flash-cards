@@ -1,5 +1,4 @@
 import type { IconName } from '@/lib/icons'
-import type { IllustrationName } from '@/components/hero/CardIllustration'
 
 /** Conjunto fechado de cores de acento — usado em cards, categorias e badges. */
 export type AccentColor = 'roxo' | 'verde' | 'amarelo' | 'coral'
@@ -17,7 +16,6 @@ export interface HeroCard {
   categoria: string
   cor: AccentColor
   titulo: string
-  ilustracao: IllustrationName
   /** Sempre 3 — cada card explica em 3 ângulos curtos em vez de um parágrafo único. */
   blocos: readonly [HeroCardBlock, HeroCardBlock, HeroCardBlock]
 }
@@ -29,7 +27,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'Emoções',
     cor: 'roxo',
     titulo: 'Nomear diminui a intensidade',
-    ilustracao: 'conversa',
     blocos: [
       { icone: 'Waves', rotulo: 'O que acontece:', texto: 'A emoção chega como uma onda difusa, sem contorno.' },
       { icone: 'MessageCircle', rotulo: 'O que ajuda:', texto: 'Encontrar a palavra certa pro que está sentindo.' },
@@ -42,7 +39,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'Comportamento',
     cor: 'amarelo',
     titulo: 'Birra raramente é manipulação',
-    ilustracao: 'sozinho',
     blocos: [
       { icone: 'HelpCircle', rotulo: 'Parece:', texto: 'Uma tentativa de manipular ou testar limites.' },
       { icone: 'Zap', rotulo: 'Geralmente é:', texto: 'Um sistema de regulação sobrecarregado.' },
@@ -55,7 +51,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'Ansiedade',
     cor: 'coral',
     titulo: 'A evitação alivia agora e ensina medo depois',
-    ilustracao: 'sozinho',
     blocos: [
       { icone: 'RefreshCw', rotulo: 'O ciclo:', texto: 'Fugir alivia na hora, então o cérebro repete a fuga.' },
       { icone: 'AlertCircle', rotulo: 'O problema:', texto: 'Cada fuga confirma que aquilo era mesmo perigoso.' },
@@ -68,7 +63,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'TDAH',
     cor: 'verde',
     titulo: 'Não é falta de atenção',
-    ilustracao: 'sozinho',
     blocos: [
       { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Falta de atenção ou preguiça de prestar atenção.' },
       { icone: 'Focus', rotulo: 'É:', texto: 'Dificuldade de decidir para onde a atenção vai.' },
@@ -81,7 +75,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'Autismo',
     cor: 'roxo',
     titulo: 'Previsibilidade é acessibilidade',
-    ilustracao: 'conversa',
     blocos: [
       { icone: 'Compass', rotulo: 'O que faz:', texto: 'Antecipar o que vai acontecer reduz a carga de processamento.' },
       { icone: 'Zap', rotulo: 'O efeito:', texto: 'Libera recursos pro que realmente importa no momento.' },
@@ -94,7 +87,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'Vínculo',
     cor: 'amarelo',
     titulo: '"Não sei" costuma ser um pedido de tempo',
-    ilustracao: 'conversa',
     blocos: [
       { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Recusa em responder ou falta de vontade.' },
       { icone: 'Clock', rotulo: 'Costuma ser:', texto: 'Um pedido de tempo, de outra pergunta ou de silêncio.' },
@@ -107,7 +99,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'Desenvolvimento',
     cor: 'verde',
     titulo: 'Antes dos 6 anos, o corpo fala primeiro',
-    ilustracao: 'escola',
     blocos: [
       { icone: 'HeartPulse', rotulo: 'Sinais comuns:', texto: 'Dor de barriga antes da escola, dor de cabeça, sono agitado.' },
       { icone: 'AlertCircle', rotulo: 'O que pode ser:', texto: 'As primeiras palavras de uma ansiedade sem nome ainda.' },
@@ -120,7 +111,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'Família',
     cor: 'roxo',
     titulo: 'Validar não é concordar',
-    ilustracao: 'familia',
     blocos: [
       { icone: 'Heart', rotulo: 'Validar:', texto: 'Reconhecer o que a criança sentiu naquele momento.' },
       { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Aprovar ou concordar com o que ela fez.' },
@@ -133,7 +123,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'Luto',
     cor: 'coral',
     titulo: 'Crianças enlutam em ondas',
-    ilustracao: 'familia',
     blocos: [
       { icone: 'CloudRain', rotulo: 'Como aparece:', texto: 'Choram, voltam a brincar, perguntam de novo, brincam de novo.' },
       { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Indiferença ou que a criança não entendeu a perda.' },
@@ -146,7 +135,6 @@ export const HERO_CARDS: HeroCard[] = [
     categoria: 'Escola',
     cor: 'amarelo',
     titulo: 'Recusa escolar quase nunca é preguiça',
-    ilustracao: 'escola',
     blocos: [
       { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Preguiça ou falta de vontade de ir à escola.' },
       { icone: 'Scale', rotulo: 'É:', texto: 'Uma conta entre o que ela teme e os recursos que sente ter.' },

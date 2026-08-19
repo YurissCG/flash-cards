@@ -2,9 +2,9 @@
 
 import { useRef } from 'react'
 import type { KeyboardEvent, PointerEvent } from 'react'
+import Image from 'next/image'
 import { motion, useIsPresent, useMotionValue, useTransform, type PanInfo, type Variants } from 'motion/react'
 import { Badge } from '@/components/ui/Badge'
-import { CardIllustration } from './CardIllustration'
 import { cn } from '@/lib/cn'
 import { EASE, SPRING } from '@/lib/motion'
 import { ICONS } from '@/lib/icons'
@@ -255,8 +255,15 @@ function CardFace({ card }: { card: HeroCard }) {
         {card.titulo}
       </p>
 
-      <div className="flex justify-center px-4 py-1">
-        <CardIllustration name={card.ilustracao} className="h-12 w-auto sm:h-14" />
+      {/* TODO: trocar por foto definitiva do tema (picsum é placeholder genérico, §8.2). */}
+      <div className="relative mt-2 h-24 w-full overflow-hidden sm:h-28">
+        <Image
+          src={`https://picsum.photos/seed/psicologia-card-${card.id}/400/300`}
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 360px, 88vw"
+          className="object-cover"
+        />
       </div>
 
       <div className="flex flex-col gap-3 px-4 pb-3">
