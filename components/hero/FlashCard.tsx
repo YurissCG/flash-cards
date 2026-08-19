@@ -255,14 +255,16 @@ function CardFace({ card }: { card: HeroCard }) {
         {card.titulo}
       </p>
 
-      {/* TODO: trocar por foto definitiva do tema (picsum é placeholder genérico, §8.2). */}
-      <div className="relative mt-2 h-24 w-full overflow-hidden sm:h-28">
+      {/* Ilustração gerada sob medida por card (fundo verde removido, PNG
+          transparente) — object-contain, não cover, pra não cortar os
+          personagens como cortaria uma foto full-bleed. */}
+      <div className="relative mt-1 h-20 w-full sm:h-24">
         <Image
-          src={`https://picsum.photos/seed/psicologia-card-${card.id}/400/300`}
+          src={`/cards/${card.id}.png`}
           alt=""
           fill
           sizes="(min-width: 1024px) 360px, 88vw"
-          className="object-cover"
+          className="object-contain"
         />
       </div>
 
