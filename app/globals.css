@@ -1,0 +1,128 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+:root {
+  /* ——— Marca ——— */
+  --roxo-900: #221A5E;  /* texto sobre claro em contextos de marca, rodapé */
+  --roxo-800: #2E2489;  /* fundo de seções roxas profundas */
+  --roxo-700: #3B2FB8;  /* gradiente de apoio */
+  --roxo-600: #4B3BD8;  /* superfície de cards SOBRE fundo roxo */
+  --roxo-500: #5B4AE8;  /* ⭐ ROXO PRINCIPAL — fundo das seções hero/oferta */
+  --roxo-400: #7B6BF2;  /* bordas, ícones secundários, estados hover */
+  --roxo-200: #C9C2FB;  /* texto de apoio sobre fundo roxo */
+  --roxo-100: #E8E4FF;  /* faixa clara, badges, fundo de chips */
+  --roxo-050: #F5F3FF;  /* fundo de seções claras */
+
+  /* ——— Ação ——— */
+  --verde-600: #45B255; /* hover do CTA */
+  --verde-500: #5FC96B; /* ⭐ CTA PRINCIPAL */
+  --verde-100: #DFF6E2; /* fundo de selos "incluso", checkmarks */
+
+  /* ——— Destaque ——— */
+  --amarelo-400: #FFD54A; /* números grandes, grifos, estrelas */
+  --amarelo-100: #FFF3CC;
+
+  /* ——— Sinalização suave ——— */
+  --coral-400: #FF6E8A;  /* apenas para "de R$ 110,90", riscos e alertas */
+
+  /* ——— Neutros ——— */
+  --tinta-900: #1A1636;  /* ⭐ TEXTO PRINCIPAL em fundo claro + texto DENTRO do CTA */
+  --tinta-600: #4A4470;  /* texto secundário */
+  --tinta-400: #8B85AD;  /* legendas, disclaimers */
+  --areia-50:  #FBFAFF;  /* fundo neutro alternativo */
+  --branco:    #FFFFFF;
+
+  /* ——— Tipografia fluida ——— */
+  --text-hero:   clamp(2.125rem, 1.55rem + 2.9vw, 3.75rem);  /* 34 → 60px  H1 */
+  --text-h2:     clamp(1.75rem, 1.35rem + 2.0vw, 2.75rem);   /* 28 → 44px  */
+  --text-h3:     clamp(1.25rem, 1.10rem + 0.75vw, 1.625rem); /* 20 → 26px  */
+  --text-lead:   clamp(1.0625rem, 1.0rem + 0.35vw, 1.25rem); /* 17 → 20px  */
+  --text-body:   1rem;                                        /* 16px       */
+  --text-sm:     0.9375rem;                                   /* 15px       */
+  --text-xs:     0.8125rem;                                   /* 13px       */
+  --text-price:  clamp(3.25rem, 2.4rem + 4.2vw, 5.5rem);      /* 52 → 88px  */
+
+  /* ——— Arredondamento ——— */
+  --radius-chip:  9999px;  /* badges, pílulas, botões pequenos */
+  --radius-sm:    12px;    /* inputs, chips de categoria */
+  --radius-md:    20px;    /* cards internos, itens de FAQ */
+  --radius-lg:    28px;    /* cards de conteúdo, caixas de bônus */
+  --radius-xl:    36px;    /* flashcards do hero, card de preço */
+  --radius-2xl:   44px;    /* blocos-seção sobrepostos */
+  --radius-btn:   9999px;  /* CTA principal — sempre pílula total */
+
+  /* ——— Sombras ——— */
+  --shadow-sm:   0 2px 8px rgba(34, 26, 94, 0.06);
+  --shadow-md:   0 8px 24px rgba(34, 26, 94, 0.10);
+  --shadow-lg:   0 18px 48px rgba(34, 26, 94, 0.16);
+  --shadow-card: 0 24px 60px rgba(21, 15, 70, 0.35);  /* flashcards sobre roxo */
+  --shadow-cta:  0 8px 0 0 #3E9A4C;                   /* "borda inferior" 3D do botão */
+
+  /* ——— Espaçamento vertical entre seções ——— */
+  --section-y-mobile:  clamp(3.5rem, 3rem + 3vw, 5rem);
+  --section-y-desktop: clamp(5rem, 4rem + 4vw, 7.5rem);
+}
+
+/*
+ * Envolvido em @layer base — igual à camada que o Tailwind usa para seu
+ * próprio reset (@import "tailwindcss" declara `@layer theme, base,
+ * components, utilities`). Regras FORA de qualquer layer sempre vencem
+ * regras DENTRO de uma layer, não importa a especificidade — sem esse
+ * @layer, este reset (ex.: `a { color: inherit }`) bateria até classes de
+ * utilitário como `text-tinta-900`, porque elas vivem dentro de
+ * `@layer utilities`. Bug real encontrado em teste: CTAs em faixa roxa
+ * herdavam branco do fundo em vez do texto escuro obrigatório do botão.
+ */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--font-body), system-ui, sans-serif;
+    color: var(--tinta-900);
+    background-color: var(--branco);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, picture, svg, video {
+    display: block;
+    max-width: 100%;
+  }
+
+  button, input, textarea, select {
+    font: inherit;
+    color: inherit;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--amarelo-400);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
