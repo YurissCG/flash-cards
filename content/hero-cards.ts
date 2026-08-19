@@ -18,6 +18,9 @@ export interface HeroCard {
   titulo: string
   /** Sempre 3 — cada card explica em 3 ângulos curtos em vez de um parágrafo único. */
   blocos: readonly [HeroCardBlock, HeroCardBlock, HeroCardBlock]
+  /** Trecho entre "aspas" vira destaque — mesma convenção do headline do Hero. */
+  dicaPratica: string
+  fechamento: string
 }
 
 export const HERO_CARDS: HeroCard[] = [
@@ -32,6 +35,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'MessageCircle', rotulo: 'O que ajuda:', texto: 'Encontrar a palavra certa pro que está sentindo.' },
       { icone: 'Eye', rotulo: 'Por quê:', texto: 'Nomear transforma a onda em algo que dá pra observar.' },
     ],
+    dicaPratica: 'Use perguntas como "O que eu estou sentindo agora?" para começar.',
+    fechamento: 'Entender emoções é o primeiro passo para acolher.',
   },
   {
     id: 'comportamento',
@@ -44,6 +49,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'Zap', rotulo: 'Geralmente é:', texto: 'Um sistema de regulação sobrecarregado.' },
       { icone: 'RefreshCw', rotulo: 'Antes de corrigir:', texto: 'Ajudar o corpo a voltar ao normal primeiro.' },
     ],
+    dicaPratica: 'Espere a birra passar antes de conversar. Corrigir no auge só aumenta a sobrecarga.',
+    fechamento: 'Regular vem antes de ensinar.',
   },
   {
     id: 'ansiedade',
@@ -56,6 +63,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'AlertCircle', rotulo: 'O problema:', texto: 'Cada fuga confirma que aquilo era mesmo perigoso.' },
       { icone: 'Waves', rotulo: 'O resultado:', texto: 'O alívio imediato é o que mantém o ciclo girando.' },
     ],
+    dicaPratica: 'Ajude a enfrentar aos poucos, em vez de evitar por completo.',
+    fechamento: 'Enfrentar aos poucos quebra o ciclo do medo.',
   },
   {
     id: 'tdah',
@@ -68,6 +77,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'Focus', rotulo: 'É:', texto: 'Dificuldade de decidir para onde a atenção vai.' },
       { icone: 'Sparkles', rotulo: 'Outro lado:', texto: 'O hiperfoco é a mesma dificuldade, só que ao contrário.' },
     ],
+    dicaPratica: 'Divida tarefas grandes em passos pequenos e visíveis.',
+    fechamento: 'Atenção direcionada, não atenção ausente.',
   },
   {
     id: 'autismo',
@@ -80,6 +91,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'Zap', rotulo: 'O efeito:', texto: 'Libera recursos pro que realmente importa no momento.' },
       { icone: 'CheckCircle2', rotulo: 'Por isso:', texto: 'Previsibilidade não é rigidez, é acessibilidade.' },
     ],
+    dicaPratica: 'Avise com antecedência sobre mudanças na rotina, sempre que possível.',
+    fechamento: 'Previsibilidade é cuidado, não rigidez.',
   },
   {
     id: 'vinculo',
@@ -92,6 +105,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'Clock', rotulo: 'Costuma ser:', texto: 'Um pedido de tempo, de outra pergunta ou de silêncio.' },
       { icone: 'MessageCircle', rotulo: 'Na prática:', texto: 'Tente um desenho, outra pergunta, ou espere mais um pouco.' },
     ],
+    dicaPratica: 'Troque a pergunta ou ofereça um desenho em vez de insistir na mesma.',
+    fechamento: 'Silêncio também é resposta.',
   },
   {
     id: 'desenvolvimento',
@@ -104,6 +119,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'AlertCircle', rotulo: 'O que pode ser:', texto: 'As primeiras palavras de uma ansiedade sem nome ainda.' },
       { icone: 'Sprout', rotulo: 'Por que importa:', texto: 'Antes dos 6 anos, o corpo fala primeiro que a boca.' },
     ],
+    dicaPratica: 'Pergunte sobre o corpo antes de perguntar sobre a escola.',
+    fechamento: 'O corpo avisa antes da criança conseguir explicar.',
   },
   {
     id: 'familia',
@@ -116,6 +133,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Aprovar ou concordar com o que ela fez.' },
       { icone: 'MessageCircle', rotulo: 'Na prática:', texto: 'São dois momentos diferentes da mesma conversa.' },
     ],
+    dicaPratica: 'Diga "Entendo que isso te deixou assim" antes de explicar a regra.',
+    fechamento: 'Validar é ouvir, não é aprovar tudo.',
   },
   {
     id: 'luto',
@@ -128,6 +147,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'HelpCircle', rotulo: 'Não é:', texto: 'Indiferença ou que a criança não entendeu a perda.' },
       { icone: 'Waves', rotulo: 'É:', texto: 'A forma infantil de suportar a dose, em ondas.' },
     ],
+    dicaPratica: 'Deixe espaço para a criança voltar a brincar sem cobrar explicação.',
+    fechamento: 'Brincar no meio da dor também é enlutar.',
   },
   {
     id: 'escola',
@@ -140,6 +161,8 @@ export const HERO_CARDS: HeroCard[] = [
       { icone: 'Scale', rotulo: 'É:', texto: 'Uma conta entre o que ela teme e os recursos que sente ter.' },
       { icone: 'RefreshCw', rotulo: 'Pra mudar:', texto: 'Precisa mexer nos dois lados da conta, não só um.' },
     ],
+    dicaPratica: 'Pergunte o que especificamente ela teme, não só se ela quer ir.',
+    fechamento: 'Toda recusa tem um motivo por trás.',
   },
 ]
 

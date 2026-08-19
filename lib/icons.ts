@@ -25,6 +25,8 @@ import {
   AlertCircle,
   Sparkles,
   CheckCircle2,
+  Brain,
+  Lightbulb,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -61,6 +63,8 @@ export const ICONS = {
   AlertCircle,
   Sparkles,
   CheckCircle2,
+  Brain,
+  Lightbulb,
 } as const satisfies Record<string, LucideIcon>
 
 export type IconName = keyof typeof ICONS

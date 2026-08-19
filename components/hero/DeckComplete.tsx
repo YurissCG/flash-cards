@@ -23,22 +23,26 @@ export function DeckComplete({ onReset }: DeckCompleteProps) {
       initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 16 }}
       animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
       transition={reducedMotion ? { duration: 0.15 } : { ...SPRING.card, delay: 0.25 }}
-      className="relative flex h-[min(62vh,460px)] w-[88vw] max-w-[380px] flex-col items-center justify-center gap-4 rounded-xl bg-white p-8 text-center shadow-card md:h-[480px] md:w-[360px]"
+      className="relative flex h-[min(70vh,486px)] w-[88vw] max-w-[380px] flex-col items-center justify-center gap-7 rounded-xl bg-white p-8 text-center shadow-card md:h-[528px] md:w-[360px]"
     >
       {!reducedMotion && <CompleteParticles />}
 
-      <CheckCircle2 aria-hidden="true" strokeWidth={2.25} className="h-10 w-10 text-verde-500" />
+      <span className="flex h-20 w-20 items-center justify-center rounded-full bg-verde-100">
+        <CheckCircle2 aria-hidden="true" strokeWidth={2} className="h-12 w-12 text-verde-500" />
+      </span>
 
-      <div>
+      <div className="flex flex-col gap-2">
         <p className="font-display text-h3 font-semibold text-tinta-900">{DECK_COMPLETE_COPY.titulo}</p>
         <p className="text-tinta-600">{DECK_COMPLETE_COPY.subtitulo}</p>
       </div>
 
-      <CtaButton label={DECK_COMPLETE_COPY.ctaLabel} origem="hero-deck-complete" size="md" />
+      <div className="flex flex-col items-center gap-3">
+        <CtaButton label={DECK_COMPLETE_COPY.ctaLabel} origem="hero-deck-complete" size="md" />
 
-      <p className="text-sm text-tinta-600">
-        {SITE.priceFormatted} · {DECK_COMPLETE_COPY.precoSufixo}
-      </p>
+        <p className="text-sm text-tinta-600">
+          {SITE.priceFormatted} · {DECK_COMPLETE_COPY.precoSufixo}
+        </p>
+      </div>
 
       <Button variant="link" size="md" onClick={onReset} className="text-tinta-600">
         <RotateCcw aria-hidden="true" strokeWidth={2.25} className="h-4 w-4" />
