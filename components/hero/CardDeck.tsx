@@ -75,12 +75,12 @@ export function CardDeck({ cards, onCardDismiss, onComplete, visibleDepth = 4 }:
   const currentCard = visible[0]
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-3">
       <div
         role="group"
         aria-roledescription={DECK_ARIA_ROLEDESCRIPTION}
         aria-label={`${DECK_ARIA_LABEL_PREFIX} — card ${index + 1} de ${total}`}
-        className="relative h-[min(78vh,670px)] w-[88vw] max-w-[380px] md:h-[645px] md:w-[360px]"
+        className="relative h-[660px] w-[88vw] max-w-[380px] md:h-[650px] md:w-[360px]"
         style={{ perspective: 1200, transformStyle: 'preserve-3d' }}
       >
         <AnimatePresence initial={false} mode="popLayout" custom={exitCustom}>

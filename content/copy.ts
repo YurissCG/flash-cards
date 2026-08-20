@@ -99,6 +99,12 @@ export const SECTION_ENTREGA = {
   lead: 'Ao garantir seu acesso hoje, você recebe:',
 } as const
 
+// §3 · 05b — Foto do produto (cards físicos, visão de conjunto)
+export const SECTION_PRODUTO_VISUAL = {
+  heading: 'Cada card, um problema real do consultório',
+  lead: 'Birra, ansiedade de separação, sobrecarga sensorial, TDAH. Um formato só, sempre à mão.',
+} as const
+
 // §3 · 06 — Vitrine de cards / marquee (roxo-50)
 export const SECTION_SHOWCASE = {
   heading: 'Veja alguns dos cards que você vai encontrar',

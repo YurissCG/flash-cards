@@ -6,6 +6,7 @@ import { SectionDor } from '@/components/sections/SectionDor'
 import { SectionMetodologia } from '@/components/sections/SectionMetodologia'
 import { SectionCategorias } from '@/components/sections/SectionCategorias'
 import { SectionEntrega } from '@/components/sections/SectionEntrega'
+import { SectionProdutoVisual } from '@/components/sections/SectionProdutoVisual'
 import { SectionShowcase } from '@/components/sections/SectionShowcase'
 import { SectionSobre } from '@/components/sections/SectionSobre'
 import { SectionProvaSocial } from '@/components/sections/SectionProvaSocial'
@@ -44,6 +45,7 @@ export default function Home() {
         <SectionMetodologia />
         <SectionCategorias />
         <SectionEntrega />
+        <SectionProdutoVisual />
         <SectionShowcase />
         <SectionSobre />
         <SectionProvaSocial />
