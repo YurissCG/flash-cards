@@ -39,36 +39,34 @@ export function HeroInteractive({ headline, subheadline, cards, ctaLabel, microc
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:items-center lg:gap-16">
-      {/* No mobile o badge "Acesso imediato" é redundante — a AnnouncementBar
-          fixa no topo já mostra a mesma frase logo acima. Troca por uma dica
-          de como mexer no deck, já que no mobile ele some da vista antes do
-          usuário chegar na DeckHint (removida) lá embaixo do deck. No
-          desktop mantém o badge original. */}
-      <Badge color="roxo" className="order-1 hidden w-fit lg:order-none lg:flex lg:col-start-1">
+      {/* O headline vem antes do deck (também no mobile): é ele que gera o
+          interesse pra pessoa querer rolar a página e ver o carrossel — não
+          o contrário. No mobile o badge "Acesso imediato" some (a
+          AnnouncementBar fixa no topo já mostra a mesma frase logo acima);
+          no desktop ele volta, ao lado do headline. */}
+      <Badge color="roxo" className="hidden w-fit lg:flex lg:col-start-1">
         {HERO_COPY.badge}
       </Badge>
-      <p className="order-1 flex w-fit items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 font-sans text-xs font-semibold text-roxo-800 lg:hidden">
+
+      <h1 className="text-balance font-display text-hero font-semibold text-white lg:col-start-1">
+        {renderHeadlineWithMark(headline)}
+      </h1>
+
+      <p className="max-w-prose text-lead text-roxo-100 lg:col-start-1">{subheadline}</p>
+
+      <div className="flex justify-center lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:self-center">
+        <CardDeck cards={cards} onComplete={() => setCompleted(true)} />
+      </div>
+
+      {/* Dica de interação — some no desktop, onde o deck já grita "interaja
+          comigo" por estar ao lado do texto, sem precisar do lembrete. */}
+      <p className="flex w-fit items-center gap-1.5 rounded-full bg-white/90 px-3 py-1.5 font-sans text-xs font-semibold text-roxo-800 lg:hidden">
         <Hand aria-hidden="true" strokeWidth={2.25} className="h-3.5 w-3.5" />
         {DECK_HINT_COPY}
       </p>
 
-      {/* No mobile, o deck vem logo depois do badge/dica — quem abre a
-          página vê e já mexe nos cards de cara, em vez de rolar por um
-          headline enorme antes de chegar na parte interativa. No desktop
-          (lg:), a posição explícita de coluna/linha manda e o `order` deixa
-          de fazer efeito. */}
-      <div className="order-2 flex justify-center lg:order-none lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:self-center">
-        <CardDeck cards={cards} onComplete={() => setCompleted(true)} />
-      </div>
-
-      <h1 className="order-3 text-balance font-display text-hero font-semibold text-white lg:order-none lg:col-start-1">
-        {renderHeadlineWithMark(headline)}
-      </h1>
-
-      <p className="order-4 max-w-prose text-lead text-roxo-100 lg:order-none lg:col-start-1">{subheadline}</p>
-
       {!completed && (
-        <div className="order-5 flex flex-col items-start gap-3 lg:order-none lg:col-start-1">
+        <div className="flex flex-col items-start gap-3 lg:col-start-1">
           <CtaButton label={ctaLabel} origem="hero" size="lg" />
           <p className="font-sans text-sm text-roxo-100">{microcopy}</p>
         </div>

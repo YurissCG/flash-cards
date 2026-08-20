@@ -23,7 +23,16 @@ export function SectionCategorias() {
                 <Icon aria-hidden="true" strokeWidth={2.25} className="h-6 w-6 text-roxo-100" />
               </div>
               <p className="mt-3 font-display text-lg font-semibold text-white">{categoria.titulo}</p>
-              <p className="mt-2 text-sm text-roxo-100">{categoria.descricao}</p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {categoria.topicos.map((topico) => (
+                  <span
+                    key={topico}
+                    className="rounded-full border border-white/20 px-2.5 py-1 text-xs text-roxo-100"
+                  >
+                    {topico}
+                  </span>
+                ))}
+              </div>
             </div>
           )
         })}
