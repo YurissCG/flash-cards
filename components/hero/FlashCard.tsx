@@ -4,11 +4,10 @@ import { useRef } from 'react'
 import type { KeyboardEvent, PointerEvent } from 'react'
 import Image from 'next/image'
 import { motion, useIsPresent, useMotionValue, useTransform, type PanInfo, type Variants } from 'motion/react'
-import { Brain, Lightbulb, Sparkles, Heart } from 'lucide-react'
+import { AlertCircle, Heart, HelpCircle, Lightbulb } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { EASE, SPRING } from '@/lib/motion'
-import { ICONS } from '@/lib/icons'
-import type { HeroCard } from '@/content/hero-cards'
+import type { AccentColor, CardBlock, HeroCard } from '@/content/hero-cards'
 
 const SWIPE_DISTANCE = 90 // px
 const SWIPE_VELOCITY = 520 // px/s
@@ -220,28 +219,24 @@ export function FlashCard({
   )
 }
 
-// Cor de acento por card — usada nos chips de ícone dos blocos (o cabeçalho
-// em si agora é sempre lavanda neutro, não colorido por categoria).
-const HEADER_BG: Record<HeroCard['cor'], string> = {
-  roxo: 'bg-roxo-500',
+// Marcador do item de lista: acompanha a cor do card, exceto quando o bloco
+// pede "colorido" (Regulação emocional), em que cada item gira por uma cor
+// diferente da paleta — não é mais fixo por card.
+const ACCENT_DOT: Record<AccentColor, string> = {
+  roxo: 'bg-roxo-400',
   verde: 'bg-verde-500',
   amarelo: 'bg-amarelo-400',
   coral: 'bg-coral-400',
 }
 
-const HEADER_TEXT: Record<HeroCard['cor'], string> = {
-  roxo: 'text-white',
-  verde: 'text-tinta-900',
-  amarelo: 'text-tinta-900',
-  coral: 'text-tinta-900',
-}
+const ROTATING_DOTS = ['bg-roxo-400', 'bg-verde-500', 'bg-amarelo-400', 'bg-coral-400']
 
 // Trecho entre "aspas" vira destaque em negrito — mesma convenção do headline
-// do Hero, aplicada aqui à dica prática.
+// do Hero, aplicada aqui aos itens de lista (ex.: um "não" dentro da frase).
 function renderWithQuoteEmphasis(text: string) {
   return text.split(/("[^"]*")/g).map((part, i) =>
     part.startsWith('"') ? (
-      <strong key={i} className="font-bold text-roxo-700">
+      <strong key={i} className="font-bold text-tinta-900">
         {part}
       </strong>
     ) : (
@@ -250,91 +245,136 @@ function renderWithQuoteEmphasis(text: string) {
   )
 }
 
+function BlockRenderer({ block, cor }: { block: CardBlock; cor: AccentColor }) {
+  switch (block.tipo) {
+    case 'lista':
+      return (
+        <div>
+          <p className="mb-1.5 text-sm font-bold text-tinta-900">{block.rotulo}</p>
+          <ul className="flex flex-col gap-1.5">
+            {block.itens.map((item, i) => (
+              <li key={item} className="flex items-start gap-2 text-sm leading-snug text-tinta-600">
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    'mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full',
+                    block.colorido ? ROTATING_DOTS[i % ROTATING_DOTS.length] : ACCENT_DOT[cor],
+                  )}
+                />
+                <span>{renderWithQuoteEmphasis(item)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+
+    case 'pergunta':
+      return (
+        <div className="rounded-lg border-l-4 border-roxo-400 bg-roxo-50 py-2 pl-3 pr-3">
+          <p className="flex items-center gap-1.5 text-xs font-bold text-roxo-700">
+            <HelpCircle aria-hidden="true" strokeWidth={2.5} className="h-3.5 w-3.5 shrink-0" />
+            {block.rotulo}
+          </p>
+          <p className="mt-1 text-sm italic leading-snug text-tinta-700">&ldquo;{block.texto}&rdquo;</p>
+        </div>
+      )
+
+    case 'aviso': {
+      const atencao = block.variante === 'atencao'
+      return (
+        <div
+          className={cn(
+            'flex items-start gap-2 rounded-lg border p-2.5',
+            atencao ? 'border-amarelo-400/50 bg-amarelo-100' : 'border-roxo-100 bg-roxo-50',
+          )}
+        >
+          {atencao ? (
+            <AlertCircle aria-hidden="true" strokeWidth={2.5} className="mt-0.5 h-4 w-4 shrink-0 text-coral-400" />
+          ) : (
+            <Lightbulb aria-hidden="true" strokeWidth={2.5} className="mt-0.5 h-4 w-4 shrink-0 text-roxo-500" />
+          )}
+          <p className="text-sm leading-snug text-tinta-700">
+            <span className="font-bold text-tinta-900">{block.rotulo} </span>
+            {block.texto}
+          </p>
+        </div>
+      )
+    }
+
+    case 'comparacao':
+      return (
+        <div className="flex flex-col gap-2">
+          <p className="text-sm leading-snug text-tinta-600">
+            <span className="font-bold text-tinta-900">Em vez de: </span>
+            <span className="italic">&ldquo;{block.evite}&rdquo;</span>
+          </p>
+          <div className="rounded-lg bg-roxo-50 p-2.5">
+            <p className="text-sm font-bold text-roxo-700">{block.experimenteRotulo}</p>
+            <ul className="mt-1 flex flex-col gap-1">
+              {block.experimente.map((item) => (
+                <li key={item} className="text-sm italic leading-snug text-tinta-700">
+                  &ldquo;{item}&rdquo;
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )
+
+    case 'definicoes':
+      return (
+        <ul className="flex flex-col gap-2">
+          {block.itens.map((item) => (
+            <li key={item.termo} className="border-l-2 border-roxo-200 pl-3">
+              <p className="text-sm font-bold text-tinta-900">{item.termo}</p>
+              <p className="text-sm leading-snug text-tinta-600">{item.texto}</p>
+            </li>
+          ))}
+        </ul>
+      )
+
+    case 'fechamento':
+      return (
+        <div className="mt-auto flex flex-col items-center gap-1 border-t border-roxo-100 pt-3 text-center">
+          <Heart aria-hidden="true" strokeWidth={2.25} className="h-3.5 w-3.5 text-roxo-400" />
+          {block.linhas.map((linha) => (
+            <p key={linha} className="text-sm italic leading-snug text-tinta-600">
+              {linha}
+            </p>
+          ))}
+        </div>
+      )
+  }
+}
+
+// Estilo editorial: foto grande com degradê e título sobreposto (mesmo
+// tratamento de destaque da variação "Story"), seguido de uma área de
+// conteúdo branca e limpa — necessária porque o texto real varia bastante de
+// tamanho entre os 10 cards (de 2 blocos curtos a listas de 7 itens).
 function CardFace({ card }: { card: HeroCard }) {
   return (
     <div className="flex h-full w-full flex-col overflow-hidden rounded-xl bg-white shadow-card">
-      <div className="flex items-center justify-between bg-roxo-50">
-        <span className="rounded-tl-xl rounded-br-lg bg-roxo-800 px-3 py-2 text-sm font-bold text-white">
-          {String(card.numero).padStart(3, '0')}
+      <div className="relative w-full shrink-0" style={{ height: card.fotoAlturaPx }}>
+        <Image src={card.foto} alt="" fill sizes="(min-width: 1024px) 360px, 88vw" className="object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-tinta-900/90 via-tinta-900/15 to-transparent" />
+        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-bold text-tinta-900">
+          {String(card.numero).padStart(3, '0')} · {card.categoria}
         </span>
-        <span className="flex items-center gap-1.5 pr-4 text-xs font-bold uppercase tracking-wide text-roxo-800">
-          <Brain aria-hidden="true" strokeWidth={2.25} className="h-3.5 w-3.5" />
-          {card.categoria}
-        </span>
+        <p className="absolute inset-x-4 bottom-3 font-display text-lg font-bold leading-tight text-white sm:text-xl">
+          {card.titulo}
+        </p>
       </div>
 
-      {/* Ilustração gerada sob medida por card (fundo verde removido, PNG
-          transparente) — object-contain, não cover, pra não cortar os
-          personagens como cortaria uma foto full-bleed. Fundo lavanda suave
-          preenche a moldura quando o personagem não ocupa o quadro inteiro. */}
-      <div className="relative h-24 w-full overflow-hidden bg-roxo-50 sm:h-28">
-        <Image
-          src={`/cards/${card.id}.png`}
-          alt=""
-          fill
-          sizes="(min-width: 1024px) 360px, 88vw"
-          className="object-contain"
-        />
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 400 20"
-          preserveAspectRatio="none"
-          className="absolute inset-x-0 bottom-0 h-4 w-full text-white"
-        >
-          <path d="M0,10 Q50,20 100,10 T200,10 T300,10 T400,10 V20 H0 Z" fill="currentColor" />
-        </svg>
-      </div>
-
-      <div className="px-4 pb-2 pt-2 text-center">
-        <p className="font-display text-[15px] font-bold leading-snug text-tinta-900 sm:text-base">{card.titulo}</p>
-        <div className="mt-1.5 flex items-center justify-center gap-1.5">
-          <svg aria-hidden="true" width="56" height="8" viewBox="0 0 56 8" fill="none" className="text-roxo-200">
-            <path
-              d="M2 5c4-5 8 4 12-1s8-4 12 1 8-4 12-1 8 4 12-1"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-          <Sparkles aria-hidden="true" strokeWidth={2} className="h-3 w-3 text-amarelo-400" />
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-1.5 px-4">
-        {card.blocos.map((bloco) => {
-          const BlockIcon = ICONS[bloco.icone]
-          return (
-            <div key={bloco.rotulo} className="flex items-start gap-2 rounded-lg border border-roxo-100 p-1.5">
-              <span
-                className={cn(
-                  'flex h-6 w-6 shrink-0 items-center justify-center rounded-md',
-                  HEADER_BG[card.cor],
-                )}
-              >
-                <BlockIcon aria-hidden="true" strokeWidth={2.5} className={cn('h-3.5 w-3.5', HEADER_TEXT[card.cor])} />
-              </span>
-              <p className="text-[11px] leading-snug text-tinta-600 sm:text-xs">
-                <span className="font-semibold text-tinta-900">{bloco.rotulo} </span>
-                {bloco.texto}
-              </p>
-            </div>
-          )
-        })}
-
-        <div className="flex items-start gap-2 rounded-lg bg-roxo-100 p-1.5">
-          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-roxo-500">
-            <Lightbulb aria-hidden="true" strokeWidth={2.5} className="h-3.5 w-3.5 text-white" />
-          </span>
-          <p className="text-[11px] leading-snug text-tinta-700 sm:text-xs">
-            <span className="font-semibold text-tinta-900">Dica prática: </span>
-            {renderWithQuoteEmphasis(card.dicaPratica)}
+      <div className="flex flex-1 flex-col gap-3 px-4 py-3">
+        {card.intro.map((paragrafo) => (
+          <p key={paragrafo} className="text-sm leading-relaxed text-tinta-600">
+            {paragrafo}
           </p>
-        </div>
-      </div>
+        ))}
 
-      <div className="mt-auto flex items-center justify-center gap-1.5 border-t border-roxo-100 px-4 py-2">
-        <Heart aria-hidden="true" strokeWidth={2.25} className="h-3 w-3 shrink-0 text-roxo-400" />
-        <p className="text-center text-[11px] italic leading-snug text-tinta-600">{card.fechamento}</p>
+        {card.blocos.map((bloco, i) => (
+          <BlockRenderer key={i} block={bloco} cor={card.cor} />
+        ))}
       </div>
     </div>
   )

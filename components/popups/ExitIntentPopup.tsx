@@ -21,7 +21,7 @@ export function ExitIntentPopup({ onDismiss }: ExitIntentPopupProps) {
       </h2>
 
       {FEATURED_CARD ? (
-        <div className="relative mt-4 h-64 w-full">
+        <div className="relative mt-4 h-72 w-full overflow-hidden rounded-xl">
           <FlashCard
             card={FEATURED_CARD}
             depth={0}
@@ -29,6 +29,13 @@ export function ExitIntentPopup({ onDismiss }: ExitIntentPopupProps) {
             custom={{ dir: 1, velocity: 0 }}
             reducedMotion
             nextTapDirection={1}
+          />
+          {/* O card real varia de altura conforme o texto (até ~650px) — aqui é
+              só uma prévia, por isso o recorte com esmaecido em vez de tentar
+              caber o conteúdo inteiro num popup. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent"
           />
         </div>
       ) : null}

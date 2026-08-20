@@ -4,14 +4,12 @@ import { SectionShell } from '@/components/ui/SectionShell'
 import { Reveal } from '@/components/ui/Reveal'
 import { SECTION_SOBRE } from '@/content/copy'
 
-// TODO: trocar por fotos reais (equipe, estúdio, atendimento) antes do deploy.
-// picsum.photos/seed/{slug} é a opção 2 do §8.2 para os poucos lugares que
-// precisam de fotografia real — sem busca por palavra-chave, é foto real
-// genérica, mas com cara profissional e 100% pronta pra ser substituída.
+// Fotos reais do dia a dia de quem usa os cards — home office, café, parque —
+// substituindo os placeholders de banco de imagens genérico (§8.2, opção 2).
 const SOBRE_PHOTOS = [
-  { seed: 'psicologia-infantil-estudo', alt: 'Pessoa estudando com livros e anotações em uma mesa' },
-  { seed: 'psicologia-infantil-biblioteca', alt: 'Estante de biblioteca com livros organizados' },
-  { seed: 'psicologia-infantil-consulta', alt: 'Ambiente de consultório acolhedor e organizado' },
+  { src: '/sobre/estudo.jpg', alt: 'Psicóloga consultando os cards no notebook, em um home office' },
+  { src: '/sobre/cafe.jpg', alt: 'Psicóloga revisando um card em um café, entre um atendimento e outro' },
+  { src: '/sobre/parque.jpg', alt: 'Psicóloga revisando os cards sentada em um banco de praça' },
 ] as const
 
 export function SectionSobre() {
@@ -58,7 +56,7 @@ export function SectionSobre() {
           <div className="grid grid-cols-2 gap-3">
             <div className="relative col-span-2 aspect-[4/3] overflow-hidden rounded-lg bg-roxo-50">
               <Image
-                src={`https://picsum.photos/seed/${SOBRE_PHOTOS[0].seed}/800/600`}
+                src={SOBRE_PHOTOS[0].src}
                 alt={SOBRE_PHOTOS[0].alt}
                 fill
                 sizes="(min-width: 1024px) 40vw, 90vw"
@@ -67,7 +65,7 @@ export function SectionSobre() {
             </div>
             <div className="relative aspect-square overflow-hidden rounded-lg bg-roxo-50">
               <Image
-                src={`https://picsum.photos/seed/${SOBRE_PHOTOS[1].seed}/500/500`}
+                src={SOBRE_PHOTOS[1].src}
                 alt={SOBRE_PHOTOS[1].alt}
                 fill
                 sizes="(min-width: 1024px) 20vw, 45vw"
@@ -76,7 +74,7 @@ export function SectionSobre() {
             </div>
             <div className="relative aspect-square overflow-hidden rounded-lg bg-roxo-50">
               <Image
-                src={`https://picsum.photos/seed/${SOBRE_PHOTOS[2].seed}/500/500`}
+                src={SOBRE_PHOTOS[2].src}
                 alt={SOBRE_PHOTOS[2].alt}
                 fill
                 sizes="(min-width: 1024px) 20vw, 45vw"

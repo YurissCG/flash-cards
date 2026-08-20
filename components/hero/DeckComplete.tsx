@@ -9,6 +9,7 @@ import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { EASE, SPRING } from '@/lib/motion'
 import { SITE } from '@/content/site'
 import { DECK_COMPLETE_COPY } from '@/content/copy'
+import { HERO_CARDS } from '@/content/hero-cards'
 
 export interface DeckCompleteProps {
   onReset: () => void
@@ -23,7 +24,7 @@ export function DeckComplete({ onReset }: DeckCompleteProps) {
       initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 16 }}
       animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
       transition={reducedMotion ? { duration: 0.15 } : { ...SPRING.card, delay: 0.25 }}
-      className="relative flex h-[min(70vh,486px)] w-[88vw] max-w-[380px] flex-col items-center justify-center gap-7 rounded-xl bg-white p-8 text-center shadow-card md:h-[528px] md:w-[360px]"
+      className="relative flex h-[min(78vh,670px)] w-[88vw] max-w-[380px] flex-col items-center justify-center gap-7 rounded-xl bg-white p-8 text-center shadow-card md:h-[645px] md:w-[360px]"
     >
       {!reducedMotion && <CompleteParticles />}
 
@@ -34,6 +35,14 @@ export function DeckComplete({ onReset }: DeckCompleteProps) {
       <div className="flex flex-col gap-2">
         <p className="font-display text-h3 font-semibold text-tinta-900">{DECK_COMPLETE_COPY.titulo}</p>
         <p className="text-tinta-600">{DECK_COMPLETE_COPY.subtitulo}</p>
+      </div>
+
+      <div aria-hidden="true" className="flex flex-wrap items-center justify-center gap-2 px-2">
+        {HERO_CARDS.map((card) => (
+          <span key={card.id} className="rounded-full bg-roxo-50 px-2.5 py-1 text-xs font-semibold text-roxo-700">
+            {card.categoria}
+          </span>
+        ))}
       </div>
 
       <div className="flex flex-col items-center gap-3">
