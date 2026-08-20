@@ -18,15 +18,19 @@ export function SectionDor() {
         ))}
       </div>
 
+      {/* No mobile, 6 cards empilhados (com padding, sombra e cantos
+          arredondados cada um) pesam demais na rolagem — vira uma lista
+          enxuta com só um traço fino entre os itens. A partir de sm:, volta
+          ao tratamento em card de 2 colunas, que já cabia bem. */}
       <RevealGroup
         as="ul"
         itemAs="li"
-        className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2"
-        itemClassName="flex items-start gap-3 rounded-md bg-white p-4 shadow-sm"
+        className="mt-6 flex flex-col divide-y divide-roxo-100 sm:mt-8 sm:grid sm:grid-cols-2 sm:gap-3 sm:divide-y-0"
+        itemClassName="flex items-start gap-2.5 py-2.5 sm:gap-3 sm:rounded-md sm:bg-white sm:p-4 sm:py-4 sm:shadow-sm"
       >
         {SECTION_DOR.pontosDeDor.map((ponto) => (
           <Fragment key={ponto}>
-            <X aria-hidden="true" strokeWidth={2.25} className="mt-0.5 h-5 w-5 shrink-0 text-coral-400" />
+            <X aria-hidden="true" strokeWidth={2.25} className="mt-0.5 h-4 w-4 shrink-0 text-coral-400 sm:h-5 sm:w-5" />
             <span className="text-sm text-tinta-600">{ponto}</span>
           </Fragment>
         ))}
