@@ -178,7 +178,7 @@ export function FlashCard({
         onKeyDown={handleKeyDown}
         className="cursor-pointer"
       >
-        <CardFace card={card} />
+        <CardFace card={card} priority />
       </motion.div>
     )
   }
@@ -214,7 +214,7 @@ export function FlashCard({
       // para um eixo único (o que quebraria dragConstraints/dragElastic em y).
       className="cursor-grab !touch-pan-y"
     >
-      <CardFace card={card} />
+      <CardFace card={card} priority />
     </motion.div>
   )
 }
@@ -351,11 +351,19 @@ function BlockRenderer({ block, cor }: { block: CardBlock; cor: AccentColor }) {
 // tratamento de destaque da variação "Story"), seguido de uma área de
 // conteúdo branca e limpa — necessária porque o texto real varia bastante de
 // tamanho entre os 10 cards (de 2 blocos curtos a listas de 7 itens).
-function CardFace({ card }: { card: HeroCard }) {
+function CardFace({ card, priority }: { card: HeroCard; priority?: boolean }) {
   return (
     <div className="flex h-full w-full flex-col overflow-hidden rounded-xl bg-white shadow-card">
       <div className="relative w-full shrink-0" style={{ height: card.fotoAlturaPx }}>
-        <Image src={card.foto} alt="" fill sizes="(min-width: 1024px) 360px, 88vw" className="object-cover" />
+        <Image
+          src={card.foto}
+          alt=""
+          fill
+          sizes="(min-width: 1024px) 360px, 88vw"
+          className="object-cover"
+          priority={priority}
+          fetchPriority={priority ? 'high' : undefined}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-tinta-900/90 via-tinta-900/15 to-transparent" />
         <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-bold text-tinta-900">
           {String(card.numero).padStart(3, '0')} · {card.categoria}

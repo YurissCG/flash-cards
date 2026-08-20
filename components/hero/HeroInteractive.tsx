@@ -38,22 +38,26 @@ export function HeroInteractive({ headline, subheadline, cards, ctaLabel, microc
 
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center lg:gap-16">
-      <Badge color="roxo" className="w-fit lg:col-start-1">
+      <Badge color="roxo" className="order-1 w-fit lg:order-none lg:col-start-1">
         {HERO_COPY.badge}
       </Badge>
 
-      <h1 className="text-balance font-display text-hero font-semibold text-white lg:col-start-1">
-        {renderHeadlineWithMark(headline)}
-      </h1>
-
-      <p className="max-w-prose text-lead text-roxo-100 lg:col-start-1">{subheadline}</p>
-
-      <div className="flex justify-center lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:self-center">
+      {/* No mobile, o deck vem logo depois do badge — quem abre a página vê e
+          já mexe nos cards de cara, em vez de rolar por um headline enorme
+          antes de chegar na parte interativa. No desktop (lg:), a posição
+          explícita de coluna/linha manda e o `order` deixa de fazer efeito. */}
+      <div className="order-2 flex justify-center lg:order-none lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:self-center">
         <CardDeck cards={cards} onComplete={() => setCompleted(true)} />
       </div>
 
+      <h1 className="order-3 text-balance font-display text-hero font-semibold text-white lg:order-none lg:col-start-1">
+        {renderHeadlineWithMark(headline)}
+      </h1>
+
+      <p className="order-4 max-w-prose text-lead text-roxo-100 lg:order-none lg:col-start-1">{subheadline}</p>
+
       {!completed && (
-        <div className="flex flex-col items-start gap-3 lg:col-start-1">
+        <div className="order-5 flex flex-col items-start gap-3 lg:order-none lg:col-start-1">
           <CtaButton label={ctaLabel} origem="hero" size="lg" />
           <p className="font-sans text-sm text-roxo-100">{microcopy}</p>
         </div>
