@@ -24,7 +24,7 @@ export function DeckComplete({ onReset }: DeckCompleteProps) {
       initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 16 }}
       animate={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
       transition={reducedMotion ? { duration: 0.15 } : { ...SPRING.card, delay: 0.25 }}
-      className="relative flex h-[660px] w-[88vw] max-w-[380px] flex-col items-center justify-center gap-7 rounded-xl bg-white p-8 text-center shadow-card md:h-[650px] md:w-[360px]"
+      className="relative flex h-[565px] w-[88vw] max-w-[380px] flex-col items-center justify-center gap-7 rounded-xl bg-white p-8 text-center shadow-card md:h-[545px] md:w-[360px]"
     >
       {!reducedMotion && <CompleteParticles />}
 

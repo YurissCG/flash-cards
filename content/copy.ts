@@ -24,7 +24,7 @@ export const HERO_COPY = {
   microcopy: 'Acesso digital · Consulte pelo celular, tablet ou computador',
 } as const
 
-export const DECK_HINT_COPY = 'Arraste ou toque'
+export const DECK_HINT_COPY = 'Toque ou arraste os cards para o lado'
 export const DECK_NEXT_BUTTON_LABEL = 'Próximo card'
 export const DECK_ARIA_LABEL_PREFIX = 'Dicas de Psicologia Infantil'
 export const DECK_ARIA_ROLEDESCRIPTION = 'Pilha de cards interativa'

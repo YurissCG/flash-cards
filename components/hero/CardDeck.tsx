@@ -5,7 +5,6 @@ import { AnimatePresence } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 import { FlashCard, type ExitCustom } from './FlashCard'
 import { DeckProgress } from './DeckProgress'
-import { DeckHint } from './DeckHint'
 import { DeckComplete } from './DeckComplete'
 import { Button } from '@/components/ui/Button'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -21,12 +20,9 @@ export interface CardDeckProps {
   visibleDepth?: number
 }
 
-const HINT_TIMEOUT_MS = 8000
-
 export function CardDeck({ cards, onCardDismiss, onComplete, visibleDepth = 4 }: CardDeckProps) {
   const [index, setIndex] = useState(0)
   const [exitCustom, setExitCustom] = useState<ExitCustom>({ dir: 1, velocity: 0 })
-  const [hintVisible, setHintVisible] = useState(true)
   const alternateDirRef = useRef<1 | -1>(1)
   const completedRef = useRef(false)
   const reducedMotion = useReducedMotion()
@@ -34,11 +30,6 @@ export function CardDeck({ cards, onCardDismiss, onComplete, visibleDepth = 4 }:
   const total = cards.length
   const isComplete = index >= total
   const visible = cards.slice(index, index + visibleDepth)
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setHintVisible(false), HINT_TIMEOUT_MS)
-    return () => clearTimeout(timeout)
-  }, [])
 
   // Suprime pop-ups (§5.5.3) enquanto o deck é a coisa saindo do lugar embaixo do dedo.
   useEffect(() => () => setInteractionSuppression('deck', false), [])
@@ -54,7 +45,6 @@ export function CardDeck({ cards, onCardDismiss, onComplete, visibleDepth = 4 }:
   function dismiss(method: 'drag' | 'tap' | 'keyboard', dir: 1 | -1, velocity: number) {
     if (index >= total) return
     setExitCustom({ dir, velocity })
-    setHintVisible(false)
     // Alterna a direção padrão para o próximo descarte sem eixo explícito
     // (tap, espaço/enter, botão "Próximo card") — evita monotonia (§5.2.6).
     alternateDirRef.current = dir === 1 ? -1 : 1
@@ -80,7 +70,7 @@ export function CardDeck({ cards, onCardDismiss, onComplete, visibleDepth = 4 }:
         role="group"
         aria-roledescription={DECK_ARIA_ROLEDESCRIPTION}
         aria-label={`${DECK_ARIA_LABEL_PREFIX} — card ${index + 1} de ${total}`}
-        className="relative h-[660px] w-[88vw] max-w-[380px] md:h-[650px] md:w-[360px]"
+        className="relative h-[565px] w-[88vw] max-w-[380px] md:h-[545px] md:w-[360px]"
         style={{ perspective: 1200, transformStyle: 'preserve-3d' }}
       >
         <AnimatePresence initial={false} mode="popLayout" custom={exitCustom}>
@@ -105,7 +95,6 @@ export function CardDeck({ cards, onCardDismiss, onComplete, visibleDepth = 4 }:
       </div>
 
       <DeckProgress current={index + 1} total={total} />
-      <DeckHint visible={hintVisible} />
 
       <Button variant="ghost" size="md" onClick={() => dismiss('keyboard', alternateDirRef.current, 0)} className="text-roxo-100">
         {DECK_NEXT_BUTTON_LABEL}

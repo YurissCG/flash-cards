@@ -250,10 +250,10 @@ function BlockRenderer({ block, cor }: { block: CardBlock; cor: AccentColor }) {
     case 'lista':
       return (
         <div>
-          <p className="mb-1.5 text-sm font-bold text-tinta-900">{block.rotulo}</p>
-          <ul className="flex flex-col gap-1.5">
+          <p className="mb-1 text-[13px] font-bold text-tinta-900">{block.rotulo}</p>
+          <ul className="flex flex-col gap-1">
             {block.itens.map((item, i) => (
-              <li key={item} className="flex items-start gap-2 text-sm leading-snug text-tinta-600">
+              <li key={item} className="flex items-start gap-1.5 text-[13px] leading-snug text-tinta-600">
                 <span
                   aria-hidden="true"
                   className={cn(
@@ -270,12 +270,12 @@ function BlockRenderer({ block, cor }: { block: CardBlock; cor: AccentColor }) {
 
     case 'pergunta':
       return (
-        <div className="rounded-lg border-l-4 border-roxo-400 bg-roxo-50 py-2 pl-3 pr-3">
-          <p className="flex items-center gap-1.5 text-xs font-bold text-roxo-700">
+        <div className="rounded-lg border-l-4 border-roxo-400 bg-roxo-50 py-1.5 pl-2.5 pr-2.5">
+          <p className="flex items-center gap-1.5 text-[11px] font-bold text-roxo-700">
             <HelpCircle aria-hidden="true" strokeWidth={2.5} className="h-3.5 w-3.5 shrink-0" />
             {block.rotulo}
           </p>
-          <p className="mt-1 text-sm italic leading-snug text-tinta-700">&ldquo;{block.texto}&rdquo;</p>
+          <p className="mt-0.5 text-[13px] italic leading-snug text-tinta-700">&ldquo;{block.texto}&rdquo;</p>
         </div>
       )
 
@@ -284,16 +284,16 @@ function BlockRenderer({ block, cor }: { block: CardBlock; cor: AccentColor }) {
       return (
         <div
           className={cn(
-            'flex items-start gap-2 rounded-lg border p-2.5',
+            'flex items-start gap-1.5 rounded-lg border p-2',
             atencao ? 'border-amarelo-400/50 bg-amarelo-100' : 'border-roxo-100 bg-roxo-50',
           )}
         >
           {atencao ? (
-            <AlertCircle aria-hidden="true" strokeWidth={2.5} className="mt-0.5 h-4 w-4 shrink-0 text-coral-400" />
+            <AlertCircle aria-hidden="true" strokeWidth={2.5} className="mt-0.5 h-3.5 w-3.5 shrink-0 text-coral-400" />
           ) : (
-            <Lightbulb aria-hidden="true" strokeWidth={2.5} className="mt-0.5 h-4 w-4 shrink-0 text-roxo-500" />
+            <Lightbulb aria-hidden="true" strokeWidth={2.5} className="mt-0.5 h-3.5 w-3.5 shrink-0 text-roxo-500" />
           )}
-          <p className="text-sm leading-snug text-tinta-700">
+          <p className="text-[13px] leading-snug text-tinta-700">
             <span className="font-bold text-tinta-900">{block.rotulo} </span>
             {block.texto}
           </p>
@@ -303,16 +303,16 @@ function BlockRenderer({ block, cor }: { block: CardBlock; cor: AccentColor }) {
 
     case 'comparacao':
       return (
-        <div className="flex flex-col gap-2">
-          <p className="text-sm leading-snug text-tinta-600">
+        <div className="flex flex-col gap-1.5">
+          <p className="text-[13px] leading-snug text-tinta-600">
             <span className="font-bold text-tinta-900">Em vez de: </span>
             <span className="italic">&ldquo;{block.evite}&rdquo;</span>
           </p>
-          <div className="rounded-lg bg-roxo-50 p-2.5">
-            <p className="text-sm font-bold text-roxo-700">{block.experimenteRotulo}</p>
-            <ul className="mt-1 flex flex-col gap-1">
+          <div className="rounded-lg bg-roxo-50 p-2">
+            <p className="text-[13px] font-bold text-roxo-700">{block.experimenteRotulo}</p>
+            <ul className="mt-0.5 flex flex-col gap-0.5">
               {block.experimente.map((item) => (
-                <li key={item} className="text-sm italic leading-snug text-tinta-700">
+                <li key={item} className="text-[13px] italic leading-snug text-tinta-700">
                   &ldquo;{item}&rdquo;
                 </li>
               ))}
@@ -323,11 +323,11 @@ function BlockRenderer({ block, cor }: { block: CardBlock; cor: AccentColor }) {
 
     case 'definicoes':
       return (
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-1.5">
           {block.itens.map((item) => (
-            <li key={item.termo} className="border-l-2 border-roxo-200 pl-3">
-              <p className="text-sm font-bold text-tinta-900">{item.termo}</p>
-              <p className="text-sm leading-snug text-tinta-600">{item.texto}</p>
+            <li key={item.termo} className="border-l-2 border-roxo-200 pl-2.5">
+              <p className="text-[13px] font-bold text-tinta-900">{item.termo}</p>
+              <p className="text-[13px] leading-snug text-tinta-600">{item.texto}</p>
             </li>
           ))}
         </ul>
@@ -335,10 +335,10 @@ function BlockRenderer({ block, cor }: { block: CardBlock; cor: AccentColor }) {
 
     case 'fechamento':
       return (
-        <div className="mt-auto flex flex-col items-center gap-1 border-t border-roxo-100 pt-3 text-center">
+        <div className="mt-auto flex flex-col items-center gap-0.5 border-t border-roxo-100 pt-2 text-center">
           <Heart aria-hidden="true" strokeWidth={2.25} className="h-3.5 w-3.5 text-roxo-400" />
           {block.linhas.map((linha) => (
-            <p key={linha} className="text-sm italic leading-snug text-tinta-600">
+            <p key={linha} className="text-[13px] italic leading-snug text-tinta-600">
               {linha}
             </p>
           ))}
@@ -368,14 +368,14 @@ function CardFace({ card, priority }: { card: HeroCard; priority?: boolean }) {
         <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-bold text-tinta-900">
           {String(card.numero).padStart(3, '0')} · {card.categoria}
         </span>
-        <p className="absolute inset-x-4 bottom-3 font-display text-lg font-bold leading-tight text-white sm:text-xl">
+        <p className="absolute inset-x-3 bottom-2.5 font-display text-base font-bold leading-tight text-white sm:text-lg">
           {card.titulo}
         </p>
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 px-4 py-3">
+      <div className="flex flex-1 flex-col gap-2 px-3.5 py-2.5">
         {card.intro.map((paragrafo) => (
-          <p key={paragrafo} className="text-sm leading-relaxed text-tinta-600">
+          <p key={paragrafo} className="text-[13px] leading-snug text-tinta-600">
             {paragrafo}
           </p>
         ))}
