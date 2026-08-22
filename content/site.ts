@@ -5,7 +5,7 @@ export const SITE = {
   priceFormatted: 'R$ 47,90',
   priceAnchor: 'R$ 130,90',
   currency: 'BRL',
-  checkoutUrl: 'https://pay.SEU-CHECKOUT.com/xxxx', // TODO: substituir pelo link real do checkout
+  checkoutUrl: 'https://pay.cakto.com.br/fscryn8_1056873',
   guaranteeDays: 7,
   supportEmail: 'contato@SEU-DOMINIO.com.br', // TODO: substituir pelo e-mail real de suporte
 } as const

@@ -10,8 +10,6 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID
 
 export function Pixels() {
-  if (!GA_ID && !META_PIXEL_ID) return null
-
   return (
     <>
       {GA_ID && (
@@ -37,6 +35,17 @@ export function Pixels() {
               fbq('track', 'PageView');`}
         </Script>
       )}
+
+      {/* UTMify — atribuição de campanhas/conversão pareada com o checkout Cakto.
+          window.pixelId precisa existir antes do pixel.js carregar (é assim
+          que o script deles lê qual conta usar). Decodifiquei o loader
+          ofuscado que a Cakto forneceu antes de colocar isso no site: só
+          define esse global e busca https://cdn.utmify.com.br/scripts/pixel/pixel.js,
+          nada além disso. */}
+      <Script id="utmify-pixel-globals" strategy="afterInteractive">
+        {`window.pixelId = "6a8993cd927959a17ffba08d";`}
+      </Script>
+      <Script src="https://cdn.utmify.com.br/scripts/pixel/pixel.js" strategy="afterInteractive" async defer />
     </>
   )
 }
