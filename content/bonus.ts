@@ -41,11 +41,11 @@ export interface ItemAncoragem {
 
 /** Comparativo "comprando separadamente" exibido na seção de bônus. */
 export const TABELA_ANCORAGEM: ItemAncoragem[] = [
-  { nome: '+300 Cards de Psicologia Infantil', valor: 47.0, valorFormatted: 'R$ 47,00' },
+  { nome: '+300 Cards de Psicologia Infantil', valor: 67.0, valorFormatted: 'R$ 67,00' },
   { nome: 'Guia de Consulta Rápida', valor: 17.0, valorFormatted: 'R$ 17,00' },
   { nome: '50 Perguntas para Construção de Vínculo', valor: 19.9, valorFormatted: 'R$ 19,90' },
   { nome: '30 Cards para Pais', valor: 27.0, valorFormatted: 'R$ 27,00' },
 ]
 
-export const VALOR_TOTAL_ANCORAGEM = 110.9
-export const VALOR_TOTAL_ANCORAGEM_FORMATTED = 'R$ 110,90'
+export const VALOR_TOTAL_ANCORAGEM = 130.9
+export const VALOR_TOTAL_ANCORAGEM_FORMATTED = 'R$ 130,90'

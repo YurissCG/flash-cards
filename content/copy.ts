@@ -140,12 +140,12 @@ export const SECTION_BONUS = {
   heading: 'Bônus inclusos',
   lead: 'E garantindo seu acesso hoje, você ainda recebe:',
   ancoragemIntro: 'Comprando separadamente você poderia pagar:',
-  naoVaiPagar: ['Mas você não vai pagar R$ 110,90.', 'Nem R$ 67.', 'Nem R$ 47.'],
+  naoVaiPagar: ['Mas você não vai pagar R$ 130,90.', 'Nem R$ 87.', 'Nem R$ 67.'],
 } as const
 
 // §3 · 10 — Preço / Oferta (roxo-500)
 export const SECTION_PRECO = {
-  heading: 'Acesso por R$ 27,90',
+  heading: 'Acesso por R$ 47,90',
   lead: 'Tenha uma biblioteca com +300 Cards de Psicologia Infantil por apenas:',
   subLead: ['Pagamento único.', 'Sem mensalidade.', 'Acesso digital.'],
   itensInclusos: [
@@ -156,7 +156,7 @@ export const SECTION_PRECO = {
     '30 Cards de Orientação para Pais',
     'Acesso digital pelo celular, tablet ou computador',
   ],
-  closingLine: 'Tudo por apenas R$ 27,90.',
+  closingLine: 'Tudo por apenas R$ 47,90.',
   comparativo: 'Menos do que você provavelmente gastaria em um único livro da área.',
   ctaLabel: 'QUERO ACESSAR OS +300 CARDS AGORA',
   microcopy: 'Pagamento seguro · Acesso digital',
@@ -191,7 +191,7 @@ export const SECTION_CTA_FINAL = {
   body: 'Tenha uma biblioteca visual com +300 Cards de Psicologia Infantil pronta para consultar sempre que precisar.',
   stats: ['+300 cards.', '12 grandes temas.'],
   heading: 'Tudo organizado em um único lugar',
-  priceLine: 'Acesso hoje por R$ 27,90.',
+  priceLine: 'Acesso hoje por R$ 47,90.',
   ctaLabel: 'SIM, QUERO OS +300 CARDS DE PSICOLOGIA INFANTIL',
   microcopy: 'Pagamento único · Produto digital · 7 dias de garantia',
 } as const

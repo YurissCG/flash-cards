@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: '%s | +300 Cards de Psicologia Infantil',
   },
   description:
-    'Biblioteca visual com mais de 300 cards de Psicologia Infantil organizados em 12 áreas — desenvolvimento, emoções, ansiedade, TDAH, autismo, família e mais. Consulte pelo celular em segundos. Acesso digital por R$ 27,90.',
+    'Biblioteca visual com mais de 300 cards de Psicologia Infantil organizados em 12 áreas — desenvolvimento, emoções, ansiedade, TDAH, autismo, família e mais. Consulte pelo celular em segundos. Acesso digital por R$ 47,90.',
   keywords: [
     'cards de psicologia infantil',
     'material de apoio psicologia infantil',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: '+300 Cards de Psicologia Infantil na palma da sua mão',
     description:
-      'Desenvolvimento, emoções, ansiedade, TDAH, autismo, família e mais — em 12 categorias organizadas para consulta rápida. Acesso digital por R$ 27,90.',
+      'Desenvolvimento, emoções, ansiedade, TDAH, autismo, família e mais — em 12 categorias organizadas para consulta rápida. Acesso digital por R$ 47,90.',
     images: [
       {
         url: '/og.jpg',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '+300 Cards de Psicologia Infantil',
-    description: 'Uma biblioteca visual para consultar em segundos. R$ 27,90, acesso digital.',
+    description: 'Uma biblioteca visual para consultar em segundos. R$ 47,90, acesso digital.',
     images: ['/og.jpg'],
   },
   category: 'education',
