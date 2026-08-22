@@ -24,6 +24,9 @@ interface ButtonAsAnchorProps extends ButtonSharedProps {
   target?: HTMLAttributeAnchorTarget
   rel?: AnchorHTMLAttributes<HTMLAnchorElement>['rel']
   onClick?: MouseEventHandler<HTMLAnchorElement>
+  /** Fase de captura — dispara antes de listeners de terceiros anexados
+   * diretamente no elemento, mesmo que eles chamem stopPropagation depois. */
+  onClickCapture?: MouseEventHandler<HTMLAnchorElement>
 }
 
 export type ButtonProps = ButtonAsButtonProps | ButtonAsAnchorProps
@@ -50,9 +53,17 @@ export function Button(props: ButtonProps) {
   const classes = cn(BASE, VARIANT_CLASSES[variant], SIZE_CLASSES[variant === 'link' ? 'link' : size], className)
 
   if (props.href !== undefined) {
-    const { href, target, rel, onClick, 'aria-label': ariaLabel } = props
+    const { href, target, rel, onClick, onClickCapture, 'aria-label': ariaLabel } = props
     return (
-      <a href={href} target={target} rel={rel} onClick={onClick} aria-label={ariaLabel} className={classes}>
+      <a
+        href={href}
+        target={target}
+        rel={rel}
+        onClick={onClick}
+        onClickCapture={onClickCapture}
+        aria-label={ariaLabel}
+        className={classes}
+      >
         {children}
       </a>
     )

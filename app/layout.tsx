@@ -66,6 +66,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR" className={`${display.variable} ${body.variable}`}>
       <body>
+        {/* Aquece a conexão com os domínios do pixel de conversão (UTMify +
+            Meta) em paralelo, sem atrasar quando o script em si carrega —
+            ele precisa continuar em afterInteractive (não lazyOnload) pra
+            não perder InitiateCheckout de cliques rápidos no CTA, então o
+            preconnect é o jeito de reduzir o custo de LCP sem mexer nisso. */}
+        <link rel="preconnect" href="https://cdn.utmify.com.br" />
+        <link rel="preconnect" href="https://tracking.utmify.com.br" />
+        <link rel="preconnect" href="https://www.facebook.com" />
         <JsonLd data={buildJsonLdGraph()} />
         <Pixels />
         {/* domAnimation cobre whileInView/whileHover/whileTap/exit — ~60% mais leve

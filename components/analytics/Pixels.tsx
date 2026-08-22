@@ -39,17 +39,20 @@ export function Pixels() {
       {/* UTMify — atribuição de campanhas/conversão pareada com o checkout Cakto.
           window.pixelId precisa existir antes do pixel.js carregar (é assim
           que o script deles lê qual conta usar). Decodifiquei o loader
-          ofuscado que a Cakto forneceu antes de colocar isso no site: só
-          define esse global e busca https://cdn.utmify.com.br/scripts/pixel/pixel.js,
-          nada além disso — mas esse script dispara chamadas extras (inclusive
-          pro pixel do Meta) que competem com o LCP em mobile throttled
-          (LCP 3,0s → 4,4s medido). lazyOnload (carrega ocioso, depois de
-          tudo o resto) resolve sem atrasar a atribuição de forma relevante —
-          é rastreamento, não algo que o usuário precisa ver. */}
-      <Script id="utmify-pixel-globals" strategy="lazyOnload">
+          ofuscado que a Cakto forneceu antes de colocar isso no site: ele
+          escaneia os <a>/<button>/<form> da página e anexa um listener de
+          click que intercepta o clique (waitBeforeAction) pra garantir que o
+          "InitiateCheckout" saia antes de abrir o checkout — mas só funciona
+          se o listener já estiver anexado QUANDO o clique acontece. Por isso
+          afterInteractive (não lazyOnload: cliques rápidos no CTA ficariam
+          sem rastreio nenhum, silenciosamente — e essa é a métrica que traz
+          cliente via Meta, não vale a pena arriscar por LCP). O custo de
+          performance fica mitigado via preconnect (ver app/layout.tsx) em
+          vez de atrasar a execução do script em si. */}
+      <Script id="utmify-pixel-globals" strategy="afterInteractive">
         {`window.pixelId = "6a8993cd927959a17ffba08d";`}
       </Script>
-      <Script src="https://cdn.utmify.com.br/scripts/pixel/pixel.js" strategy="lazyOnload" async defer />
+      <Script src="https://cdn.utmify.com.br/scripts/pixel/pixel.js" strategy="afterInteractive" async defer />
     </>
   )
 }

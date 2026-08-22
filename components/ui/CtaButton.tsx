@@ -3,6 +3,7 @@
 import { Button, type ButtonSize } from './Button'
 import { track } from '@/lib/analytics'
 import { SITE } from '@/content/site'
+import { armCheckoutSafetyNet } from '@/lib/checkout-safety-net'
 
 /** Onde o CTA aparece na página — mapeia 1:1 para as seções de §3. */
 export type CtaOrigem =
@@ -37,6 +38,7 @@ export function CtaButton({ label, origem, size = 'lg', className }: CtaButtonPr
       variant="primary"
       size={size}
       className={className}
+      onClickCapture={armCheckoutSafetyNet}
       onClick={() => track('begin_checkout', { origem })}
     >
       {label}
