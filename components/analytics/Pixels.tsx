@@ -41,11 +41,15 @@ export function Pixels() {
           que o script deles lê qual conta usar). Decodifiquei o loader
           ofuscado que a Cakto forneceu antes de colocar isso no site: só
           define esse global e busca https://cdn.utmify.com.br/scripts/pixel/pixel.js,
-          nada além disso. */}
-      <Script id="utmify-pixel-globals" strategy="afterInteractive">
+          nada além disso — mas esse script dispara chamadas extras (inclusive
+          pro pixel do Meta) que competem com o LCP em mobile throttled
+          (LCP 3,0s → 4,4s medido). lazyOnload (carrega ocioso, depois de
+          tudo o resto) resolve sem atrasar a atribuição de forma relevante —
+          é rastreamento, não algo que o usuário precisa ver. */}
+      <Script id="utmify-pixel-globals" strategy="lazyOnload">
         {`window.pixelId = "6a8993cd927959a17ffba08d";`}
       </Script>
-      <Script src="https://cdn.utmify.com.br/scripts/pixel/pixel.js" strategy="afterInteractive" async defer />
+      <Script src="https://cdn.utmify.com.br/scripts/pixel/pixel.js" strategy="lazyOnload" async defer />
     </>
   )
 }
